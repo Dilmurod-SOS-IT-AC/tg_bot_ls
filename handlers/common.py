@@ -3,18 +3,18 @@ from telegram.ext import ContextTypes
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
-    await update.messaged.reply_text(
+    await update.message.reply_text(
         f"Hello, {user.first_name} \n"
         f"Welcome to the ShopBot" 
     )
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.messaged.reply_text(
-        f"COmmands: \n"
-        f"/start to start the bot"
-        f"/help to get all commands" 
-        f"/start to start the bot" 
-        f"/start to start the bot" 
+    await update.message.reply_text(
+        f"Commands: \n"
+        f"/start to start the bot \n"
+        f"/help to get all commands \n" 
+        f"/myID to check personal Telegram ID \n" 
+        f"/start to start the bot \n" 
     )
 
 async def my_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
