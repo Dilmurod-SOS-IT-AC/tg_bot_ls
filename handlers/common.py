@@ -17,3 +17,5 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"/start to start the bot" 
     )
 
+async def my_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(f"Your Telegram ID: {update.effective_user.id}")
