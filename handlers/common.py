@@ -19,3 +19,6 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def my_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"Your Telegram ID: {update.effective_user.id}")
+
+    # /start hello world
+    # context.args # -> ["hello" "world"] 
