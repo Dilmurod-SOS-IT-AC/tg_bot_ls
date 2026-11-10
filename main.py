@@ -1,10 +1,12 @@
 import logging
 
 from telegram import Update
-from telegram.ext import Application, CommandHandler
+from telegram.ext import Application, CommandHandler, MessageHandler, filters
 
 from config import BOT_TOKEN
 from handlers import common
+
+from keyboards import BTN_ABOUT, BTN_MY_ORDERS
 
 logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
@@ -18,7 +20,12 @@ def main () -> None:
     app.add_handler(CommandHandler("help", common.help))
     app.add_handler(CommandHandler("myID", common.my_id))
     app.add_handler(CommandHandler("status", common.order_status))
+
+    app.add_handler(MessageHandler(filters.Text(BTN_MY_ORDERS), common.my_orders))
+    app.add_handler(MessageHandler(filters.Text(BTN_ABOUT), common.about))
+
     
+
     print("Bot running ...")
     app.run_polling()
 

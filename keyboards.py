@@ -13,6 +13,8 @@ BTN_FEEDBACK = "Feendback"
 
 
 
+def fmt_price(value: int) -> str: 
+    return f"{value:.}".replace(".", " ") + " som"
 
 def main_menu() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
