@@ -38,3 +38,21 @@ def phone_keyboard() -> ReplyKeyboardMarkup:
         resize_keyboard=True,
         one_time_keyboard=True
     )
+
+
+
+def catalog_keyboard(products: list[dict]) -> InlineKeyboardMarkup:
+    rows = [
+        [InlineKeyboardButton(
+            f"{p['name']} - {fmt_price(p['price'])}",
+            callback_data=f"product:{p['id']}"
+        )]
+        for p in products
+    ]
+    return InlineKeyboardMarkup(rows)
+
+def product_keyboard(product_id: int) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton("Order", callback_data=f"order:{product_id}")]
+        [InlineKeyboardButton("Back", callback_data=f"catalog")]
+    ])
