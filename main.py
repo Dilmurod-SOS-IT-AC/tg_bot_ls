@@ -17,7 +17,8 @@ def main () -> None:
     app.add_handler(CommandHandler("start", common.start))
     app.add_handler(CommandHandler("help", common.help))
     app.add_handler(CommandHandler("myID", common.my_id))
-
+    app.add_handler(CommandHandler("status", common.order_status))
+    
     print("Bot running ...")
     app.run_polling()
 

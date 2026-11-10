@@ -111,19 +111,46 @@ def seed_demo_products():
 
 """ --- orders"""
 
-def add_order():
-    pass
+def add_order(user_id: int, product: dict, quantity: int,
+              name: str, phone: str, address: str) -> dict:
+    db = load_db()
+    order = {
+        "id": db["next_order_id"],
+        "user_id": user_id,
+        "product_id": product["id"],
+        "product_name": product["name"],  # копируем: товар могут удалить
+        "quantity": quantity,
+        "total": product["price"] * quantity,
+        "name": name,
+        "phone": phone,
+        "address": address,
+        "status": "new",
+        "created": now(),
+    }
+    db["orders"].append(order)
+    db["next_order_id"] += 1
+    save_db(db)
+    return order
 
-def get_order():
-    pass
 
-def get_orders():
-    pass
-
-def get_user_orders():
-    pass
-
-def set_order_status():
-    pass
+def get_order(order_id: int) -> dict | None:
+    return next((o for o in load_db()["orders"] if o["id"] == order_id), None)
 
 
+def get_orders(status: str | None = None) -> list[dict]:
+    orders = load_db()["orders"]
+    return [o for o in orders if status is None or o["status"] == status]
+
+
+def get_user_orders(user_id: int) -> list[dict]:
+    return [o for o in load_db()["orders"] if o["user_id"] == user_id]
+
+
+def set_order_status(order_id: int, status: str) -> dict | None:
+    db = load_db()
+    for order in db["orders"]:
+        if order["id"] == order_id:
+            order["status"] = status
+            save_db(db)
+            return order
+    return None
