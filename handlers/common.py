@@ -16,7 +16,7 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"/start to start the bot \n"
         f"/help to get all commands \n" 
         f"/myID to check personal Telegram ID \n" 
-        f"/start to start the bot \n" 
+        f"/status to start the bot \n" 
     )
 
 async def my_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
