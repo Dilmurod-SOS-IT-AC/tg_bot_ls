@@ -1,7 +1,7 @@
 import logging
 
 from telegram import Update
-from telegram.ext import Application, CommandHandler, MessageHandler, filters
+from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackQueryHandler
 
 from config import BOT_TOKEN
 from handlers import common, catalog
@@ -25,6 +25,8 @@ def main () -> None:
     app.add_handler(MessageHandler(filters.Text(BTN_ABOUT), common.about))
 
     app.add_handler(MessageHandler(filters.Text([BTN_CATALOG]), catalog.show_catalog))
+    app.add_handler(CallbackQueryHandler(catalog.product_callback, pattern=r"^product:\d+$"))
+    app.add_handler(CallbackQueryHandler(catalog.catalog_callback, pattern=r"^catalog$"))
 
     print("Bot running ...")
     app.run_polling()
