@@ -40,7 +40,6 @@ def phone_keyboard() -> ReplyKeyboardMarkup:
     )
 
 
-
 def catalog_keyboard(products: list[dict]) -> InlineKeyboardMarkup:
     rows = [
         [InlineKeyboardButton(
