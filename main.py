@@ -29,8 +29,8 @@ def main () -> None:
     app.add_handler(CallbackQueryHandler(catalog.catalog_callback, pattern=r"^catalog$"))
 
     app.add_handler(MessageHandler(filters.Text([BTN_FEEDBACK]), feedback.feedback_promt))
-    app.add_handler(MessageHandler(filters.PHOTO(), feedback.handle_photo))
-    app.add_handler(MessageHandler(filters.Document(), feedback.handle_image_doc))
+    app.add_handler(MessageHandler(filters.PHOTO, feedback.handle_photo))
+    app.add_handler(MessageHandler(filters.Document.IMAGE, feedback.handle_image_doc))
 
 
     print("Bot running ...")
