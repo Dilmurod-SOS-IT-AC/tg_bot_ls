@@ -4,9 +4,9 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackQueryHandler
 
 from config import BOT_TOKEN
-from handlers import common, catalog
+from handlers import common, catalog, feedback
 
-from keyboards import BTN_ABOUT, BTN_MY_ORDERS, BTN_CATALOG
+from keyboards import BTN_ABOUT, BTN_MY_ORDERS, BTN_CATALOG, BTN_FEEDBACK
 
 logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
@@ -27,6 +27,11 @@ def main () -> None:
     app.add_handler(MessageHandler(filters.Text([BTN_CATALOG]), catalog.show_catalog))
     app.add_handler(CallbackQueryHandler(catalog.product_callback, pattern=r"^product:\d+$"))
     app.add_handler(CallbackQueryHandler(catalog.catalog_callback, pattern=r"^catalog$"))
+
+    app.add_handler(MessageHandler(filters.Text([BTN_FEEDBACK]), feedback.feedback_promt))
+    app.add_handler(MessageHandler(filters.PHOTO(), feedback.handle_photo))
+    app.add_handler(MessageHandler(filters.Document(), feedback.handle_image_doc))
+
 
     print("Bot running ...")
     app.run_polling()
